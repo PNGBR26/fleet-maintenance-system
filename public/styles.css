@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fleet Maintenance Control</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Fleet Maintenance Control</h1>
+        <p>Preventive maintenance and compliance tracking</p>
+      </div>
+      <button id="refreshData">Refresh</button>
+    </header>
+
+    <main class="page">
+      <section class="summary-grid" id="summaryGrid"></section>
+
+      <section class="panel two-column">
+        <div>
+          <h2>Fleet Overview</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Make/Model</th>
+                <th>Odometer</th>
+                <th>Hours</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="fleetTableBody"></tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2>Upcoming Maintenance Alerts</h2>
+          <ul id="alertList" class="alert-list"></ul>
+        </div>
+      </section>
+
+      <section class="panel forms-grid">
+        <div>
+          <h3>Add Vehicle</h3>
+          <form id="vehicleForm">
+            <input type="text" name="name" placeholder="Vehicle name" required />
+            <input type="text" name="make" placeholder="Make" />
+            <input type="text" name="model" placeholder="Model" />
+            <input type="number" name="year" placeholder="Year" />
+            <input type="text" name="license_plate" placeholder="License plate" />
+            <input type="text" name="vin" placeholder="VIN" />
+            <input type="number" name="odometer_km" placeholder="Odometer (km)" />
+            <input type="number" name="operating_hours" placeholder="Operating hours" />
+            <select name="status">
+              <option value="active">Active</option>
+              <option value="maintenance">Maintenance</option>
+              <option value="standby">Standby</option>
+            </select>
+            <button type="submit">Save Vehicle</button>
+          </form>
+        </div>
+
+        <div>
+          <h3>Log Service</h3>
+          <form id="serviceForm">
+            <select name="vehicle_id" id="serviceVehicleSelect"></select>
+            <select name="service_type">
+              <option value="A">A Service</option>
+              <option value="B">B Service</option>
+              <option value="C">C Service</option>
+            </select>
+            <input type="date" name="performed_at" required />
+            <input type="number" name="odometer_km" placeholder="Odometer (km)" />
+            <input type="number" name="operating_hours" placeholder="Hours" />
+            <input type="text" name="technician" placeholder="Technician" />
+            <input type="number" name="cost" step="0.01" placeholder="Cost" />
+            <input type="text" name="parts_replaced" placeholder="Parts replaced" />
+            <textarea name="notes" placeholder="Notes"></textarea>
+            <button type="submit">Record Service</button>
+          </form>
+        </div>
+
+        <div>
+          <h3>Inspection Log</h3>
+          <form id="inspectionForm">
+            <select name="vehicle_id" id="inspectionVehicleSelect"></select>
+            <select name="inspection_type">
+              <option value="Pre-Trip">Pre-Trip</option>
+              <option value="Post-Trip">Post-Trip</option>
+              <option value="Safety Check">Safety Check</option>
+            </select>
+            <input type="date" name="performed_at" required />
+            <input type="text" name="operator_name" placeholder="Operator name" />
+            <select name="passed">
+              <option value="true">Pass</option>
+              <option value="false">Fail</option>
+            </select>
+            <textarea name="findings" placeholder="Findings"></textarea>
+            <textarea name="action_required" placeholder="Action required"></textarea>
+            <button type="submit">Save Inspection</button>
+          </form>
+        </div>
+
+        <div>
+          <h3>Spare Parts Inventory</h3>
+          <form id="partsForm">
+            <input type="text" name="name" placeholder="Part name" required />
+            <input type="text" name="category" placeholder="Category" required />
+            <input type="number" name="quantity" placeholder="Qty on hand" />
+            <input type="number" name="reorder_level" placeholder="Reorder level" />
+            <input type="text" name="location" placeholder="Location" />
+            <input type="number" name="unit_cost" step="0.01" placeholder="Unit cost" />
+            <button type="submit">Add Part</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Service History</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Vehicle</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Odometer</th>
+              <th>Hours</th>
+              <th>Cost</th>
+              <th>Technician</th>
+            </tr>
+          </thead>
+          <tbody id="serviceHistoryBody"></tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Compliance & Safety Documents</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Vehicle</th>
+              <th>Document</th>
+              <th>Reference</th>
+              <th>Expiry</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="complianceBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
